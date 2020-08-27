@@ -1,0 +1,17 @@
+#!/bin/bash
+
+/usr/local/bin/wpcli core download --locale=fr_FR --force
+/usr/local/bin/wpcli core version
+/usr/local/bin/wpcli core config --dbhost=$WP_DB_HOST --dbname=$WP_DB --dbuser=$WP_DB_USER --dbpass=$WP_DB_PASSWORD --skip-check --extra-php <<PHP
+define( 'WP_DEBUG', true );
+PHP
+# install
+/usr/local/bin/wpcli core install --url=$WP_URL --title=$WP_TITLE --admin_user=$WP_ADMIN_USERNAME --admin_email=$WP_ADMIN_EMAIL --admin_password=$WP_ADMIN_PASSWORD
+
+# Install plugins
+if [ ! -f /wp-plugins ]; then
+while read line
+do
+    /usr/local/bin/wpcli plugin install $line --activate
+done < /wp-plugins
+fi
