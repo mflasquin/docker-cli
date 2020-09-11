@@ -1,4 +1,4 @@
-FROM php:latest
+FROM php:fpm
 LABEL maintainer="Maxime Flasquin contact@mflasquin.fr"
 
 # =========================================
