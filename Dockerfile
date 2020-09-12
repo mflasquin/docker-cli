@@ -1,4 +1,4 @@
-FROM php:fpm
+FROM php:latest
 LABEL maintainer="Maxime Flasquin contact@mflasquin.fr"
 
 # =========================================
@@ -69,7 +69,7 @@ RUN npm install -g gulp-cli
 # Configure the GD library
 # =========================================
 RUN docker-php-ext-configure \
-    gd
+    gd --with-freetype --with-jpeg
 
 # =========================================
 # Install php required extensions
