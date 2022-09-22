@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:7.4-fpm
 LABEL maintainer="Maxime Flasquin contact@mflasquin.fr"
 
 # =========================================
@@ -55,7 +55,7 @@ RUN apt-get update && apt-get install -y yarn
 # =========================================
 # Install npm
 # =========================================
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install -y nodejs
 
 # =========================================
@@ -69,7 +69,7 @@ RUN npm install -g gulp-cli
 # Configure the GD library
 # =========================================
 RUN docker-php-ext-configure \
-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+    gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/
 
 # =========================================
 # Install php required extensions
